@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:mobile_developer_test_task/models/user_model.dart';
 import 'package:mobile_developer_test_task/services/user_api.dart';
 
+import 'widgets/icon_field.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
   @override
@@ -49,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
           centerTitle: true,
           leading: BackButton(
             onPressed: () {
-              // Куди вона перекидатиме, якщо це перший екран?
+              // Куди вона повертатиме, якщо це перший екран?
             },
           ),
         ),
@@ -63,21 +65,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 TextFormField(
                   controller: nameCtrl,
                   decoration: const InputDecoration(
-                    icon: _Icon(),
+                    icon: IconField(),
                     labelText: 'Name',
                   ),
                 ),
                 TextFormField(
                   controller: emailCtrl,
                   decoration: const InputDecoration(
-                    icon: _Icon(),
+                    icon: IconField(),
                     labelText: 'Email',
                   ),
                 ),
                 TextFormField(
                   controller: messageCtrl,
                   decoration: const InputDecoration(
-                    icon: _Icon(),
+                    icon: IconField(),
                     labelText: 'Message',
                   ),
                 ),
@@ -105,6 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> sendUser() async {
+    FocusManager.instance.primaryFocus?.unfocus();
     setState(() => isLoading = true);
     final user = UserModel(
       name: nameCtrl.text.trim(),
@@ -121,20 +124,5 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       );
     });
-  }
-}
-
-class _Icon extends StatelessWidget {
-  const _Icon();
-  @override
-  Widget build(BuildContext context) {
-    return CircleAvatar(
-      backgroundColor: Colors.orange[100],
-      child: const Icon(
-        Icons.lock_open_outlined,
-        size: 18,
-        color: Colors.orange,
-      ),
-    );
   }
 }
