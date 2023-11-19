@@ -1,0 +1,4 @@
+*.js linguist-language=javascript
+*.py linguist-language=python
+*.java linguist-language=java
+*.yaml linguist-language=dart
